@@ -1,6 +1,7 @@
 package hsport.com.example.king.storyadapter;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -128,4 +129,16 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return true;
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences sharedPreferences=getSharedPreferences("settings",MODE_PRIVATE);
+        int colorsbac= sharedPreferences.getInt("color",SettingsActivity.whiteColor);
+        int text= sharedPreferences.getInt("textSize",SettingsActivity.textSize);
+        containerView.setBackgroundColor(colorsbac);
+        DetailsActivity.PriceView.setTextSize(text);
+        DetailsActivity.desView.setTextSize(text);
+    }
+
 }
